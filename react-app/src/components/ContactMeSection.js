@@ -4,7 +4,6 @@ import {
     Box,
     Button, 
     FormControl,
-    FormMessage,
     FormLabel,
     Heading,
     Input,
@@ -48,41 +47,64 @@ const LandingSection = () => {
             py={16}
             spacing={8}
         >
-            <VStack>
-                <Heading>
+            <VStack w="1024px" p={32} alignItems="flex-start">
+                <Heading as="h1" id="contactme-section">
+                    Contact Me
                 </Heading>
-                <Box>
+                <Box p={6} rounded="md" w="100%">
                     <form onSubmit={formik.handleSubmit}>
+                        <VStack spacing={4}>
+                            <FormControl isInvalid={formik.touched.firstName && formik.errors.firstName}>
+                                <FormLabel htmlFor="firstName">Name</FormLabel>
+                                <Input
+                                    id="firstName"
+                                    name="firstName"
+                                    {...formik.getFieldProps("firstName")}
+                                />
+                                <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
+                            </FormControl>
+                            <FormControl isInvalid={formik.touched.email && formik.errors.email}>
+                                <FormLabel htmlFor="email">Email Addresss</FormLabel>
+                                <Input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    {...formik.getFieldProps("email")}
+                                />
+                                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>                
+                            </FormControl>
+                            <FormControl isInvalid={formik.touched.email && formik.errors.email}>
+                                <FormLabel htmlFor="type">Type of Inquiry</FormLabel>
+                                <Select
+                                    id="type"
+                                    name="type"
+                                    {...formik.getFieldProps("type")}
+                                >
+                                    <option value="hireMe">Freelance project proposal</option>
+                                    <option value="openSource">Open source consultancy session</option>
+                                    <option value="other">Other</option>
 
-                        <VStack>
-                            <FormControl>
-                                <FormLabel></FormLabel>
-                                <Input/>
-                                <FormErrorMessage></FormErrorMessage>
+                                </Select>
                             </FormControl>
-                            <FormControl>
-                                <FormLabel></FormLabel>
-                                <Input/>
-                                <FormErrorMessage></FormErrorMessage>                
+                            <FormControl isInvalid={formik.touched.comment && formik.errors.comment}>
+                                <FormLabel htmlFor="comment">Your message</FormLabel>
+                                <Textarea
+                                    id="comment"
+                                    name="comment"
+                                    height={250}
+                                    {...formik.getFieldProps("comment")}
+                                />
+                                <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>                
                             </FormControl>
-                            <FormControl>
-                                <FormLabel></FormLabel>
-                                <Textarea/>
-                                <FormErrorMessage></FormErrorMessage>                
-                            </FormControl>
-                            <Button>
+                            <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading}>
+                                Submit
                             </Button>
                         </VStack>
-
                     </form>
-
                 </Box>
-
             </VStack>
-
-
         </FullScreenSection>
-    )
+    );
+};
 
-
-}
+export default LandingSection;

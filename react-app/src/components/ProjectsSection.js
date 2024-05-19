@@ -40,14 +40,14 @@ const ProjectsSection = () => {
                 gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                 gridGap={8}
             >
-                {projects.map((project) => {
+                {projects.map((project) => (
                     <Card
                         key={project.title}
                         title={project.title}
                         description={project.description}
                         imageSrc={project.getImageSrc()}
                     />
-                })}
+                ))}
             </Box>
         </FullScreenSection>
     );
